@@ -1,0 +1,14 @@
+Main color yellow : #f7d217
+Font color blue : #193496
+Approved font color green : #00bf63
+Not approved font color red : #ff0000
+
+Font Style: Poppins
+
+Background Sign In:
+- Blur intensity : 30
+- Transparency : 30
+- White Stroke : corner radius 15, #f5f7f8, transparency 80
+- Email Address button color : #ffffff
+- Border button : #cbcfdd
+

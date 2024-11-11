@@ -1,7 +1,115 @@
-.login-container{
-    color: blue;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
-.button-login{
-    background-color: red;
+.main-container::before{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url('../../../public/my-assets/Background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.header-up{
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #f7d217;
+    text-align: center;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
+    height: auto;
+    margin-top: 40px;
+}
+
+.login-container{
+    margin-top: 10px;
+    background-color: #f5f7f8;
+    width:300px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 15px;
+    height:400px;
+    opacity: 0.8;
+    text-align: center;
+}
+
+.sign-in{
+    display: flex;
+    font-family: monospace;
+    font-size: 30px;
+    color:#193496;
+    font-weight: bolder;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+}
+
+p {
+    margin-top: 0px;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.input-form{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+input{
+    padding-left: 20px;
+    max-width: 90%;
+    width: 500px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.login-button{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.login-button button{
+    width: 150px;
+    height: 35px;
+    border-radius: 15px;
+    background-color:  #193496;
+    color: white;
+    z-index: 1;
+}
+
+.login-button button:hover{
+    background-color: #f7d217;
+    color: black;
+}
+
+.login-container a{
+    bottom: 0px;
+}
+
+.forgot {
+    margin-top: 90px;
 }

@@ -1,4 +1,3 @@
-import { use } from "react"
 import "./utils/global.css"
 
 export const metadata = {
