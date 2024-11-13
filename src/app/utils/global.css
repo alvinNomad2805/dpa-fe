@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: var(--font-poppins),sans-serif;
 }
 
 .main-container::before{
@@ -21,6 +21,9 @@
     background-position: center;
     opacity: 0.4;
     z-index: -1;
+     /* Add the blur effect */
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
 }
 
 .header-up{
@@ -111,5 +114,14 @@ input{
 }
 
 .forgot {
-    margin-top: 90px;
+    margin-top: 60px;
+    font-weight: bolder;
+}
+
+.forgot a{
+    color: #193496;
+}
+
+.dashboard{
+    background-color: blue;
 }

@@ -1,4 +1,11 @@
 import "./utils/global.css"
+import {Poppins} from 'next/font/google'
+
+const poppins_init = Poppins({
+  subsets:['latin'],
+  weight:['100','300','700'],
+  variable:'--font-poppins'
+})
 
 export const metadata = {
   title: 'Next.js',
@@ -12,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className={poppins_init.variable}>{children}</body>
     </html>
   )
 }
