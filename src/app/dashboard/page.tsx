@@ -8,6 +8,9 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { useDemoRouter } from '@toolpad/core/internal';
+import HomeIcon from '@mui/icons-material/Home';
+import ScheduleIcon from '@mui/icons-material/Schedule'
+import { useState } from 'react';
 
 const demoTheme = createTheme({
   cssVariables: {
@@ -24,6 +27,12 @@ const demoTheme = createTheme({
     },
   },
 });
+
+interface MenuList {
+  segment:string
+  title:string
+  icon:any
+}
 
 function DemoPageContent({ pathname }: { pathname: string }) {
   return (
@@ -51,6 +60,20 @@ interface DemoProps {
 
 export default function DashboardLayoutNavigationLinks(props: DemoProps) {
   const { window } = props;
+  const [listMenu, setListMenu] = useState([])
+
+  const getData:MenuList[] = [
+    {
+      segment: 'schedule',
+      title: 'Schedule',
+      icon: <ScheduleIcon/>,
+    },
+    {
+      segment: 'approval-history',
+      title: 'Approval History',
+      icon: <DescriptionIcon />,
+    },
+  ]
 
   const router = useDemoRouter('/home');
 
@@ -61,20 +84,15 @@ export default function DashboardLayoutNavigationLinks(props: DemoProps) {
     // preview-start
     <AppProvider
       navigation={[
-        {
-          segment: 'home',
-          title: 'Home',
-          icon: <DescriptionIcon />,
-        },
-        {
-          segment: 'about',
-          title: 'About Us',
-          icon: <DescriptionIcon />,
-        },
+      
       ]}
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo:<img src="/my-assets/uii-logo.png" alt='UII LOGO' height={24}/>,
+        title:'Aplikasi Pembimbingan Akademik',
+      }}
     >
       <DashboardLayout>
         <DemoPageContent pathname={router.pathname} />
