@@ -1,5 +1,19 @@
-const getMenuList = () => {
-    
-}
+export interface MenuList {
+    segment:string
+    title:string
+  }
 
-export default getMenuList
+const getMenu = ():any => {
+    const fetchedData:MenuList[] = [
+        {
+            segment: 'schedule',
+            title: 'Schedule',
+        },
+        {
+            segment: 'approval-history',
+            title: 'Approval History',
+        },
+    ]   
+    return fetchedData
+}
+export default getMenu

@@ -41,7 +41,6 @@ const goto_dashboard = () => {
 					<a href="#">Forgot Password</a>
 				</div>
 			</div>
-
 		</div>
 	</> 
   )
