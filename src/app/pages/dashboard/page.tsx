@@ -1,16 +1,20 @@
 'use client'
 
-import Sidebar from "@/app/components/sidebar";
 import PageTemplate from "@/app/sidebarlayout";
-import { useEffect } from "react";
+
 
 function TestDulu() {
 
   return (
     <>
       <div className="layout">
-        <PageTemplate></PageTemplate>
-        <p>Checking first</p>
+        <PageTemplate 
+          Page="Dashboard"
+          User="04524001"
+          ></PageTemplate>
+        <p>Checking first
+          
+        </p>
       </div>
     </>
 

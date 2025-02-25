@@ -1,3 +1,5 @@
+
+import MySidebar from "./components/sidebar"
 import "./utils/global.css"
 import {Poppins} from 'next/font/google'
 

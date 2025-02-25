@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -18,6 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { useRouter } from 'next/navigation';
 
 const drawerWidth = 240;
 
@@ -103,9 +105,15 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export interface parameters {
+  User?:string
+  Page?:string
+}
+
+export default function MySidebar(props:parameters) {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
+  const router = useRouter()
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -114,6 +122,14 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const handlePage = (page:string) => {
+    console.log(page)
+    if (page === 'Schedule'){
+      console.log('pindah halaman')
+      router.push('/pages/schedule')
+    }
+  }
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -135,7 +151,7 @@ export default function MiniDrawer() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Selamat Datang, Alvin Sahroni, Ph.D.
+            Selamat Datang, {props.User}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -147,9 +163,10 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Dashboard','Schedule', 'Approval History'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
+                onClick={()=>{handlePage(text)}}
                 sx={[
                   {
                     minHeight: 48,
@@ -199,9 +216,10 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          {['Settings','Account'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
+                onClick={()=>{console.log(index)}}
                 sx={[
                   {
                     minHeight: 48,
@@ -213,7 +231,7 @@ export default function MiniDrawer() {
                       }
                     : {
                         justifyContent: 'center',
-                      },
+                      }
                 ]}
               >
                 <ListItemIcon
@@ -252,8 +270,8 @@ export default function MiniDrawer() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-          <h2>Pick Consultation Date</h2>   
-          <Divider></Divider>  
+          <Typography variant='h4'>{props.Page}</Typography>   
+          <Divider></Divider>
       </Box>
     </Box>
   );
