@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import RootLayout from "../layout"
+import RootLayout from "./layout"
 
 const Home = () => {
   const router = useRouter()
