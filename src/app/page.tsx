@@ -13,7 +13,7 @@ const Home = () => {
 const goto_dashboard = async () => {
     if (UserName === 'admin' && password === 'abc123'){
 		console.log('login as dosen')
-		console.log(await getMenu(2))
+		console.log(await getMenu())
 		// router.push("/pages/dashboard")
 	}
 	else if (UserName === '1234' && password === '1234'){
