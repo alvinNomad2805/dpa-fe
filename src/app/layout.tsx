@@ -1,5 +1,4 @@
 
-import MySidebar from "./components/sidebar"
 import "./utils/global.css"
 import {Poppins} from 'next/font/google'
 
@@ -9,14 +8,13 @@ const poppins_init = Poppins({
   variable:'--font-poppins'
 })
 
-export const metadata = {
-  title: 'DPA UII Application',
-  description: 'Aplikasi Bimbingan Akademik Jurusan Teknik Elektro FTI UII',
-}
-
 export default function RootLayout({children,}: {children: React.ReactNode}) {
   return (
     <html lang="en">
+      <head>
+        <title>DPA UII Application</title>
+        <meta name='description' content="Aplikasi Bimbingan Akademik Jurusan Teknik Elektro FTI UII"></meta>
+      </head>
       <body className={poppins_init.variable}>{children}</body>
     </html>
   )

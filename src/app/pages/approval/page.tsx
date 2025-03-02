@@ -1,25 +1,22 @@
 'use client'
 
-import PageTemplate from "@/app/sidebarlayout";
-import { Box, Typography } from "@mui/material";
+import MySidebar from "@/app/components/sidebar";
+import { Grid, TextField } from "@mui/material";
+
+const getTheValue = () =>{
+  console.log(getTheValue)
+}
 
 function ApprovalPageContent() {
   return (
-    <>
-      <PageTemplate></PageTemplate>
-      <Box
-        sx={{
-          py: 4,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-        }}
+    <MySidebar
+      Page="Approval Page"
       >
-        <Typography>Dashboard content for Approval page only</Typography>
-      </Box>
-    </>
-    
+        <Grid
+          container
+        >
+        </Grid>
+    </MySidebar>
   );
 }
 

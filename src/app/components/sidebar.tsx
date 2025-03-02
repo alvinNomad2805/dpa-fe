@@ -1,9 +1,9 @@
 'use client'
+
 import * as React from 'react';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,11 +20,12 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { useRouter } from 'next/navigation';
-
-const drawerWidth = 240;
+import AppBar from './headerappbar';
+import { ReactNode } from 'react';
+import Cookies from 'js-cookie'
 
 const openedMixin = (theme: Theme): CSSObject => ({
-  width: drawerWidth,
+  width: 240,
   transition: theme.transitions.create('width', {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -53,36 +54,11 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  variants: [
-    {
-      props: ({ open }) => open,
-      style: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(['width', 'margin'], {
-          easing: theme.transitions.easing.sharp,
-          duration: theme.transitions.duration.enteringScreen,
-        }),
-      },
-    },
-  ],
-}));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme }) => ({
-    width: drawerWidth,
+    width: 240,
     flexShrink: 0,
     whiteSpace: 'nowrap',
     boxSizing: 'border-box',
@@ -106,8 +82,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export interface parameters {
-  User?:string
   Page?:string
+  children:ReactNode
 }
 
 export default function MySidebar(props:parameters) {
@@ -124,11 +100,8 @@ export default function MySidebar(props:parameters) {
   };
 
   const handlePage = (page:string) => {
-    console.log(page)
-    if (page === 'Schedule'){
-      console.log('pindah halaman')
-      router.push('/pages/schedule')
-    }
+    console.log(`/${page.toLowerCase()}`)
+    router.push(`/pages/${page.toLowerCase()}`)
   }
 
   return (
@@ -151,7 +124,7 @@ export default function MySidebar(props:parameters) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Selamat Datang, {props.User}
+            Selamat Datang, {Cookies.get('username')}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -163,7 +136,7 @@ export default function MySidebar(props:parameters) {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Dashboard','Schedule', 'Approval History'].map((text, index) => (
+          {['Dashboard','Schedule', 'Approval'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
                 onClick={()=>{handlePage(text)}}
@@ -272,6 +245,7 @@ export default function MySidebar(props:parameters) {
         <DrawerHeader />
           <Typography variant='h4'>{props.Page}</Typography>   
           <Divider></Divider>
+            {props.children}
       </Box>
     </Box>
   );

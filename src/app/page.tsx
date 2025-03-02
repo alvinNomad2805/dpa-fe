@@ -2,15 +2,28 @@
 
 import { useRouter } from "next/navigation"
 import RootLayout from "./layout"
+import { useState } from "react"
+import Cookies from 'js-cookie'
 
 const Home = () => {
   const router = useRouter()
+  const [UserName,setUserName] = useState("")
+  const [password,setPassword] = useState("")
 const goto_dashboard = () => {
-    console.log("Go to dashbboard page")
-    router.push("/dashboard")
+    if (UserName === 'admin' && password === 'abc123'){
+		console.log('login as dosen')
+		router.push("/pages/dashboard")
+	}
+	else if (UserName === '1234' && password === '1234'){
+		console.log('login as student')
+	}
+	else {
+		alert('User not registered')
+	}
+	Cookies.set("username", UserName, { expires: 7 }); // Cookie expires in 7 days
   }
   return (
-	<>
+	<RootLayout>
 		<div className="main-container">
 			<div className="header-up">
 				Sistem Informasi Bimbingan Akademik @ 2024
@@ -18,17 +31,19 @@ const goto_dashboard = () => {
 			<img src="/my-assets/uii-logo.png" alt="" />
 
 			<div className="login-container">
-				<div className="sign-in">
+				<div 
+					className="sign-in"
+				>
 					<span>Sign In</span>
 				</div>
 				<p>Sign in if you have an account</p>
 
 				<div className="input-form">
-					<input placeholder="Email Address"></input>
+					<input placeholder="Email Address" onChange={(e)=>setUserName(e.target.value)}></input>
 				</div>
 
-				<div className="input-form">
-					<input placeholder="Password"></input>
+				<div className="input-form" >
+					<input placeholder="Password" onChange={(e)=>setPassword(e.target.value)}></input>
 				</div>
 
 				<div className="login-button">
@@ -43,7 +58,7 @@ const goto_dashboard = () => {
 				</div>
 			</div>
 		</div>
-	</>
+	</RootLayout>
   )
 }
 
