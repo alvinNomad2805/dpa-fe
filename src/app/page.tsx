@@ -4,15 +4,17 @@ import { useRouter } from "next/navigation"
 import RootLayout from "./layout"
 import { useState } from "react"
 import Cookies from 'js-cookie'
+import getMenu from "./api/getMenuList"
 
 const Home = () => {
   const router = useRouter()
   const [UserName,setUserName] = useState("")
   const [password,setPassword] = useState("")
-const goto_dashboard = () => {
+const goto_dashboard = async () => {
     if (UserName === 'admin' && password === 'abc123'){
 		console.log('login as dosen')
-		router.push("/pages/dashboard")
+		console.log(await getMenu(2))
+		// router.push("/pages/dashboard")
 	}
 	else if (UserName === '1234' && password === '1234'){
 		console.log('login as student')
