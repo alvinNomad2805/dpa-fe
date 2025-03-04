@@ -191,7 +191,7 @@ export default function MySidebar(props:parameters) {
           {['Settings','Account'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                onClick={()=>{handlePage(text)}}
+                onClick={()=>{console.log(index)}}
                 sx={[
                   {
                     minHeight: 48,
