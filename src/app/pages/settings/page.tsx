@@ -1,14 +1,16 @@
+'use client'
+
 import MySidebar from "@/app/components/sidebar";
-import { Grid, TextField } from "@mui/material";
+import { Grid} from "@mui/material";
 
 const getTheValue = () =>{
   console.log(getTheValue)
 }
 
-function ApprovalPageContent() {
+function SettingPage() {
   return (
     <MySidebar
-      Page="Approval Page"
+      Page="Settings"
       >
         <Grid
           container
@@ -18,4 +20,4 @@ function ApprovalPageContent() {
   );
 }
 
-export default ApprovalPageContent
+export default SettingPage

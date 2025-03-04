@@ -50,7 +50,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -192,7 +191,7 @@ export default function MySidebar(props:parameters) {
           {['Settings','Account'].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                onClick={()=>{console.log(index)}}
+                onClick={()=>{handlePage(text)}}
                 sx={[
                   {
                     minHeight: 48,
