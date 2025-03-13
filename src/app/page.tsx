@@ -18,6 +18,8 @@ const goto_dashboard = async () => {
 	}
 	else if (UserName === '1234' && password === '1234'){
 		console.log('login as student')
+		console.log(await getMenu())
+		router.push("/pages/dashboard")
 	}
 	else {
 		alert('User not registered')
