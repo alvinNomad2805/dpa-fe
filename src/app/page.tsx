@@ -39,7 +39,6 @@ const goto_dashboard = async () => {
 				height={80}
 				width={80}
 				priority={true}
-				layout="fixed"
 				>
 				</Image>
 
