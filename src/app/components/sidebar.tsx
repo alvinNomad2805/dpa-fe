@@ -17,12 +17,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { useRouter } from 'next/navigation';
 import AppBar from './headerappbar';
 import { ReactNode } from 'react';
 import Cookies from 'js-cookie'
+import {Card} from '@mui/material'
+import Image from 'next/image'
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: 240,
@@ -85,10 +90,49 @@ export interface parameters {
   children:ReactNode
 }
 
+interface MenuProps {
+  id:number
+  name:string
+}
+
 export default function MySidebar(props:parameters) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const router = useRouter()
+
+  const iconMapping:any = {
+    Dashboard:<DashboardIcon/>,
+    Schedule:<CalendarMonthIcon/>,
+    FollowUp:<PermContactCalendarIcon/>,
+    Settings:<SettingsIcon/>,
+    Account:<AccountBoxIcon/>
+  }
+
+  const roleMenu:MenuProps[] = [
+    {
+      id:1,
+      name:"Dashboard",
+    },
+    {
+      id:2,
+      name:"Schedule",
+    },
+    {
+      id:3,
+      name:"FollowUp",
+    }
+  ]
+
+  const settingMenu:MenuProps[] = [
+    {
+      id:4,
+      name:"Settings",
+    },
+    {
+      id:5,
+      name:"Account",
+    }
+  ]
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -135,10 +179,10 @@ export default function MySidebar(props:parameters) {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Dashboard','Schedule', 'Approval'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {roleMenu.map((item) => (
+            <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                onClick={()=>{handlePage(text)}}
+                onClick={()=>{handlePage(item.name)}}
                 sx={[
                   {
                     minHeight: 48,
@@ -153,7 +197,7 @@ export default function MySidebar(props:parameters) {
                       },
                 ]}
               >
-                <ListItemIcon
+                <ListItemIcon key={item.id}
                   sx={[
                     {
                       minWidth: 0,
@@ -168,10 +212,10 @@ export default function MySidebar(props:parameters) {
                         },
                   ]}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {iconMapping[item.name]}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary={item.name}
                   sx={[
                     open
                       ? {
@@ -188,10 +232,10 @@ export default function MySidebar(props:parameters) {
         </List>
         <Divider />
         <List>
-          {['Settings','Account'].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+          {settingMenu.map((item) => (
+            <ListItem key={item.id} disablePadding sx={{ display: 'block' }}>
               <ListItemButton
-                onClick={()=>{console.log(index)}}
+                onClick={()=>{console.log(item.name)}}
                 sx={[
                   {
                     minHeight: 48,
@@ -221,10 +265,10 @@ export default function MySidebar(props:parameters) {
                         },
                   ]}
                 >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  {iconMapping[item.name]}
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary={item.name}
                   sx={[
                     open
                       ? {
@@ -239,6 +283,21 @@ export default function MySidebar(props:parameters) {
             </ListItem>
           ))}
         </List>
+        <Box
+          sx={{
+            alignContent:'center',
+            marginTop:'200px'
+          }}
+          >
+          <Image
+            src={'/my-assets/UII_LOGO.png'}
+            alt='uii-logo'
+            height={50}
+            width={100}
+            priority={true}
+            >
+          </Image>
+        </Box>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
@@ -246,6 +305,7 @@ export default function MySidebar(props:parameters) {
           <Divider></Divider>
             {props.children}
       </Box>
+
     </Box>
   );
 }

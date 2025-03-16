@@ -5,6 +5,7 @@ import RootLayout from "./layout"
 import { useState } from "react"
 import Cookies from 'js-cookie'
 import getMenu from "./api/getMenuList"
+import Image from 'next/image'
 
 const Home = () => {
   const router = useRouter()
@@ -32,7 +33,15 @@ const goto_dashboard = async () => {
 			<div className="header-up">
 				Sistem Informasi Bimbingan Akademik @ 2024
 			</div>
-			<img src="/my-assets/uii-logo.png" alt="" />
+			<Image
+				src={'/my-assets/uii-logo.png'}
+				alt='uii-logo'
+				height={80}
+				width={80}
+				priority={true}
+				layout="fixed"
+				>
+				</Image>
 
 			<div className="login-container">
 				<div 

@@ -8,7 +8,7 @@ const getTheValue = () =>{
 function ApprovalPageContent() {
   return (
     <MySidebar
-      Page="Approval Page"
+      Page="Follow Up"
       >
         <Grid
           container
