@@ -41,7 +41,7 @@ function ApprovalPageContent() {
   ]
 
   const handleDoubleClick = (row:any) => {
-    router.push('/pages/schedule/'+row.id)
+    router.push('/pages/followup/'+row.id)
   }
 
   return (

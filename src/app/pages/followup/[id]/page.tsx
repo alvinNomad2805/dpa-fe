@@ -1,7 +1,7 @@
 'use client'
 
 import MySidebar from "@/app/components/sidebar";
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
@@ -33,17 +33,54 @@ function Schedule({params}:{params:any}){
                         >
                         </TimePicker>
                     </LocalizationProvider>
-                    
+                </Grid>
+
+                <Grid
+                    container
+                    >
+                    <Typography
+                        variant='h5'
+                        sx={{
+                            marginTop:'15px'
+                        }}
+                        >Problem</Typography>
                     <TextField
                         id="counseling"
-                        label="Counseling"
+                        label="Put your Description"
                         multiline
-                        minRows={10}
+                        minRows={5}
                         fullWidth
                         sx={{
                             marginTop:'20px'
                         }}
                     />
+
+                </Grid>
+
+                <Grid
+                    container
+                    >
+                    <Typography
+                        variant='h5'
+                        sx={{
+                            marginTop:'15px'
+                        }}
+                        >Feedback</Typography>
+                    <TextField
+                        id="feedback"
+                        label="Put your Description"
+                        multiline
+                        minRows={5}
+                        fullWidth
+                        sx={{
+                            marginTop:'20px'
+                        }}
+                    />
+
+                    <Grid alignContent={'center'}>
+                        <p>Meeting Type :</p>
+                        <p>Meeting Location :</p>
+                    </Grid>
                 </Grid>
 
                 <Grid
@@ -68,7 +105,6 @@ function Schedule({params}:{params:any}){
                         }}
                         onClick={()=>{}}
                         >Submit</Button>
-
                 </Grid>
 
         </MySidebar>
