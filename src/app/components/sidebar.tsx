@@ -21,7 +21,6 @@ import { useRouter } from 'next/navigation';
 import AppBar from './headerappbar';
 import { ReactNode } from 'react';
 import Cookies from 'js-cookie'
-import {Card} from '@mui/material'
 import Image from 'next/image'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SettingsIcon from '@mui/icons-material/Settings';
