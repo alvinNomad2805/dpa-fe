@@ -138,11 +138,11 @@ export default function MySidebar(props:parameters) {
   };
 
   const handleDrawerClose = () => {
+    console.log('tutup')
     setOpen(false);
   };
 
   const handlePage = (page:string) => {
-    console.log(`/${page.toLowerCase()}`)
     router.push(`/pages/${page.toLowerCase()}`)
   }
 
@@ -289,7 +289,7 @@ export default function MySidebar(props:parameters) {
           }}
           >
           <Image
-            src={'/my-assets/UII_LOGO.png'}
+            src={open?'/my-assets/UII_LOGO.png':'/my-assets/UII_LOGO_SHORT.png'}
             alt='uii-logo'
             height={50}
             width={100}

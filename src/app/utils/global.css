@@ -124,3 +124,8 @@ input{
 .forgot a{
     color: #193496;
 }
+
+.password-toogle{
+    position: fixed;
+    margin-right: -220px;
+}

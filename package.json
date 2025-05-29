@@ -12,6 +12,8 @@
     "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@mui/icons-material": "^5.16.14",
     "@mui/material": "^5.0.0",
     "@mui/material-nextjs": "^5.16.6",

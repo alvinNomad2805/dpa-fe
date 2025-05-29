@@ -11,6 +11,7 @@ const Home = () => {
   const router = useRouter()
   const [UserName,setUserName] = useState("")
   const [password,setPassword] = useState("")
+  const [visibility,setVisibility] = useState(true)
 const goto_dashboard = async () => {
     if (UserName === 'admin' && password === 'abc123'){
 		console.log('login as dosen')
@@ -55,7 +56,18 @@ const goto_dashboard = async () => {
 				</div>
 
 				<div className="input-form" >
-					<input placeholder="Password" onChange={(e)=>setPassword(e.target.value)}></input>
+					<input 
+						type={visibility?"password":"text"}
+						placeholder="Password" 
+						onChange={(e)=>setPassword(e.target.value)}
+						required
+						/>
+						<span 
+							className="password-toogle"
+							onClick={()=>setVisibility(!visibility)}
+							>
+							{visibility ? "🙈" : "🙉"}
+						</span>
 				</div>
 
 				<div className="login-button">
@@ -63,7 +75,7 @@ const goto_dashboard = async () => {
 						onClick={goto_dashboard}
 					>Sign In</button>
 				</div>
-				<a href="#"> or Sign Up</a>
+				<a href="/#" onClick={()=>router.push("/pages/auth/register")}> or Sign Up</a>
 				<br />
 				<div className="forgot">
 					<a href="#">Forgot Password</a>
