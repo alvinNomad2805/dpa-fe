@@ -28,8 +28,6 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
-//sedang uji coba
-
 const openedMixin = (theme: Theme): CSSObject => ({
   width: 240,
   transition: theme.transitions.create('width', {
