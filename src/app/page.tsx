@@ -6,6 +6,8 @@ import { useState } from "react"
 import Cookies from 'js-cookie'
 import getMenu from "./api/getMenuList"
 import Image from 'next/image'
+import LoginUser, { LoginProps, LoginRequest } from "./utils/api/AuthUser"
+import getData from "./utils/api/GetUser"
 
 const Home = () => {
   const router = useRouter()
@@ -13,20 +15,21 @@ const Home = () => {
   const [password,setPassword] = useState("")
   const [visibility,setVisibility] = useState(true)
 const goto_dashboard = async () => {
-    if (UserName === 'admin' && password === 'abc123'){
-		console.log('login as dosen')
-		// console.log(await getMenu())
+	try{
+
+		const status_post = await LoginUser({
+			user_email_address:UserName,
+			user_password:password
+		})
+		alert('Login Success')
+		Cookies.set('username',status_post.data.user_data.user_fullname)	
 		router.push("/pages/dashboard")
+		
+
+	}catch (error){
+		console.error('Failed to Login, check your password ',error)
 	}
-	else if (UserName === '1234' && password === '1234'){
-		console.log('login as student')
-		console.log(await getMenu())
-		router.push("/pages/dashboard")
-	}
-	else {
-		alert('User not registered')
-	}
-	Cookies.set("username", UserName, { expires: 7 }); // Cookie expires in 7 days
+	
   }
   return (
 	<RootLayout>
