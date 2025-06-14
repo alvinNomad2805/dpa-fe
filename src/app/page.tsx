@@ -23,6 +23,7 @@ const goto_dashboard = async () => {
 		})
 		alert('Login Success')
 		Cookies.set('username',status_post.data.user_data.user_fullname)	
+		Cookies.set('token',status_post.data.token)
 		router.push("/pages/dashboard")
 		
 
