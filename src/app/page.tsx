@@ -8,6 +8,13 @@ import getMenu from "./api/getMenuList"
 import Image from 'next/image'
 import LoginUser, { LoginProps, LoginRequest } from "./utils/api/AuthUser"
 import getData from "./utils/api/GetUser"
+import { jwtDecode, JwtPayload } from "jwt-decode"
+
+interface tokenPayload extends JwtPayload {
+	user_email_address:string,
+	user_id:number,
+	exp:number
+}
 
 const Home = () => {
   const router = useRouter()
@@ -24,6 +31,9 @@ const goto_dashboard = async () => {
 		alert('Login Success')
 		Cookies.set('username',status_post.data.user_data.user_fullname)	
 		Cookies.set('token',status_post.data.token)
+		const token_data = jwtDecode<tokenPayload>(status_post.data.token)
+		console.log(token_data)
+		localStorage.setItem('user_id',token_data.user_id.toString())
 		router.push("/pages/dashboard")
 		
 

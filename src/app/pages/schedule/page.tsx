@@ -10,6 +10,7 @@ import dayjs, { Dayjs } from "dayjs";
 import Cookies from 'js-cookie'
 import { jwtDecode } from "jwt-decode";
 import postNewSchedule, { schedulePost } from "./api/postSchedule";
+import { useRouter } from "next/navigation";
 
 interface jwtPayload {
     user_email_address:string
@@ -21,7 +22,7 @@ const Schedule = () => {
     const [pickDate,setPickDate] = useState<Dayjs|null>(dayjs())
     const [pickTime,setPickTime] = useState<Dayjs|null>(dayjs())
     const [pickCounseling,setPickCounseling] = useState<string>("")
-
+    const router = useRouter()
 
     const handleSubmit = async () =>{
         try{
@@ -39,6 +40,7 @@ const Schedule = () => {
             }
             await postNewSchedule(post_request)
             alert('Schedule added')
+            router.push('/pages/followup')
         }catch{(error:any)=>alert(error)}
     }
 

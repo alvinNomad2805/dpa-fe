@@ -4,16 +4,18 @@ import MySidebar from "@/app/components/sidebar";
 import { Grid } from "@mui/material";
 import {DataGrid, GridColDef} from '@mui/x-data-grid'
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { GetCounselingSchedule, ScheduleProp } from "./api/CounselingSchedule";
 
 
 const counselingListColumn:GridColDef[] =[
   {
-    field:'counseling_submit_date',
+    field:'created_datetime',
     headerName:'Date Submit',
     flex:2
   },
   {
-    field:'counseling_followup_date',
+    field:'counseling_date',
     headerName:'Counseling Date',
     flex:2
   },
@@ -23,7 +25,7 @@ const counselingListColumn:GridColDef[] =[
     flex:2
   },
   {
-    field:'counseling_status',
+    field:'status_name',
     headerName:'Status',
     flex:2,
   },
@@ -31,14 +33,18 @@ const counselingListColumn:GridColDef[] =[
 
 function ApprovalPageContent() {
   const router = useRouter()
+  const [dataFollowUp,setDataFollowUp] = useState<ScheduleProp>()
 
-  const rows_data = [
-    {id:1,counseling_submit_date:'2024-02-01',counseling_followup_date:'2025-01-01',counseling_topic:'coba makan enak',counseling_status:'Wait Approve'},
-    {id:2,counseling_submit_date:'2024-02-01',counseling_followup_date:'2025-01-01',counseling_topic:'makan lagi',counseling_status:'Wait Approve'},
-    {id:3,counseling_submit_date:'2024-02-01',counseling_followup_date:'2025-01-01',counseling_topic:'kaleyo',counseling_status:'Wait Approve'},
-    {id:4,counseling_submit_date:'2024-02-01',counseling_followup_date:'2025-01-01',counseling_topic:'coba makan enak',counseling_status:'Wait Approve'},
-    {id:5,counseling_submit_date:'2024-02-01',counseling_followup_date:'2025-01-01',counseling_topic:'coba makan enak',counseling_status:'Wait Approve'}
-  ]
+  useEffect(()=>{
+    GetCounselingSchedule({
+      user_id:Number(localStorage.getItem('user_id')),
+      limit:10,
+      page:0
+    }).then((response:any)=>{
+      console.log(response.data)
+      setDataFollowUp(response)
+    })
+  },[])
 
   const handleDoubleClick = (row:any) => {
     router.push('/pages/followup/'+row.id)
@@ -56,8 +62,9 @@ function ApprovalPageContent() {
               marginTop:'30px'
             }}
             columns={counselingListColumn}
-            rows={rows_data}
+            rows={dataFollowUp?.data}
             onRowDoubleClick={handleDoubleClick}
+            getRowId={(data:any)=>{return data.counseling_id}}
             ></DataGrid>
         </Grid>
     </MySidebar>

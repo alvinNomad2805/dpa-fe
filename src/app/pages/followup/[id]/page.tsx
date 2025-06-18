@@ -4,11 +4,23 @@ import MySidebar from "@/app/components/sidebar";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useEffect, useState } from "react";
+import { GetCounselingScheduleById, ScheduleByIdResponse } from "../api/CounselingSchedule";
+import dayjs from "dayjs";
 
 function Schedule({params}:{params:any}){
+    const [detailData,setDetailData] = useState<ScheduleByIdResponse>()
+
+
+    useEffect(()=>{
+        GetCounselingScheduleById(params.id).then((response:any)=>{
+            setDetailData(response.data)
+            console.log(response.data)
+        })
+    },[params.id])
     return (
         <MySidebar
-            Page={`Schedule Detail : ID ${params.id}`}
+            Page={`Pembimbingan Akademik Dosen ${detailData?.lecturer_name}`}
             >
                 <Grid
                     container
@@ -19,6 +31,8 @@ function Schedule({params}:{params:any}){
                             sx={{
                                 marginTop:"20px"
                             }}
+                            value={dayjs(detailData?.counseling_date)}
+                            disabled={true}
                         >
                         </DatePicker>
                     </LocalizationProvider>
@@ -30,6 +44,8 @@ function Schedule({params}:{params:any}){
                                 marginTop:"20px",
                                 marginLeft:"20px"
                             }}
+                            value={dayjs(detailData?.counseling_time,'HH:mm ss')}
+                            disabled={true}
                         >
                         </TimePicker>
                     </LocalizationProvider>
@@ -46,13 +62,14 @@ function Schedule({params}:{params:any}){
                         >Problem</Typography>
                     <TextField
                         id="counseling"
-                        label="Put your Description"
                         multiline
                         minRows={5}
                         fullWidth
                         sx={{
                             marginTop:'20px'
                         }}
+                        value={detailData?.counseling_topic}
+                        disabled={true}
                     />
 
                 </Grid>
